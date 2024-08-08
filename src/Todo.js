@@ -5,7 +5,6 @@ export default class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
-    this.project = project;
     this.complete = false;
   }
 }
