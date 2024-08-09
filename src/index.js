@@ -10,3 +10,5 @@ import {
   toggleTodoComplete,
 } from "./appLogic";
 import { setAddButtonsListeners } from "./DOM";
+
+setAddButtonsListeners();

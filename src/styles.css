@@ -49,7 +49,7 @@ main {
 .add-new:hover,
 .add-todo:hover,
 .add-project:hover {
-  filter: brightness(85%);
+  filter: brightness(75%);
 }
 
 .add-todo {
