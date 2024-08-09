@@ -1,5 +1,6 @@
 import Project from "./Project";
 import Todo from "./Todo";
+import { isToday } from "date-fns";
 
 export function initializeStorage() {
   createProject("Default");
@@ -111,6 +112,17 @@ export function toggleTodoComplete(id) {
   }
 }
 
-export function getTodayTodos() {}
+export function getTodayTodos() {
+  const todayTodos = [];
+  for (let i = 1; i < localStorage.length; i++) {
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    project.todos.forEach((todo) => {
+      if (isToday(new Date(todo.dueDate))) {
+        todayTodos.push(todo);
+      }
+    });
+  }
+  return todayTodos;
+}
 
 export function getProjectTodos(project) {}
