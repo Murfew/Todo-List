@@ -28,7 +28,7 @@ body {
   width: 75px;
   border-radius: 100%;
   font-size: 3.5em;
-  color: var(--white);
+  color: black;
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -46,6 +46,28 @@ main {
   text-decoration: underline var(--dark-purple);
 }
 
-.add-new:hover {
+.add-new:hover,
+.add-todo:hover,
+.add-project:hover {
   filter: brightness(85%);
+}
+
+.add-todo {
+  position: absolute;
+  bottom: 50px;
+  right: 120px;
+}
+
+.add-project {
+  position: absolute;
+  bottom: 120px;
+  right: 20px;
+}
+.add-todo,
+.add-project {
+  background-color: var(--light-purple);
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  display: none;
 }
