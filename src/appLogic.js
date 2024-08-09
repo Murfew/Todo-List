@@ -7,6 +7,7 @@ export function initializeStorage() {
 }
 
 export function createProject(title) {
+  //TODO no duplicate names
   localStorage.setItem(title, JSON.stringify(new Project(title)));
 }
 
@@ -17,7 +18,7 @@ export function removeProject(title) {
 export function createTodo(
   title,
   description = "",
-  dueDate = undefined,
+  dueDate = "",
   priority = 0,
   project = "Default"
 ) {
@@ -34,82 +35,80 @@ export function createTodo(
   localStorage.setItem(project, JSON.stringify(todoProject));
 }
 
-export function removeTodo(id) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo, index) => {
-      if (todo.id == id) {
-        project.todos.splice(index, 1);
-        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
-        return;
-      }
-    });
-  }
+export function removeTodo(id, projectName = "Default") {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo, index) => {
+    if (todo.id == id) {
+      project.todos.splice(index, 1);
+      localStorage.setItem(projectName, JSON.stringify(project));
+      return;
+    }
+  });
 }
 
-export function setTodoTitle(id, newTitle) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo) => {
-      if (todo.id == id) {
-        todo.title = newTitle;
-        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
-        return;
-      }
-    });
-  }
+export function setTodoTitle(id, newTitle, projectName = "Default") {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo) => {
+    if (todo.id == id) {
+      todo.title = newTitle;
+      localStorage.setItem(projectName, JSON.stringify(project));
+      return;
+    }
+  });
 }
 
-export function setTodoDescription(id, newDescription) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo) => {
-      if (todo.id == id) {
-        todo.description = newDescription;
-        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
-        return;
-      }
-    });
-  }
+export function setTodoDescription(
+  id,
+  newDescription,
+  projectName = "Default"
+) {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo) => {
+    if (todo.id == id) {
+      todo.description = newDescription;
+      localStorage.setItem(projectName, JSON.stringify(project));
+      return;
+    }
+  });
 }
 
-export function setTodoDueDate(id, newDueDate) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo) => {
-      if (todo.id == id) {
-        todo.dueDate = newDueDate;
-        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
-        return;
-      }
-    });
-  }
+export function setTodoDueDate(id, newDueDate, projectName = "Default") {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo) => {
+    if (todo.id == id) {
+      todo.dueDate = newDueDate;
+      localStorage.setItem(projectName, JSON.stringify(project));
+      return;
+    }
+  });
 }
 
-export function setTodoPriority(id, newPriority) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo) => {
-      if (todo.id == id) {
-        todo.priority = newPriority;
-        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
-        return;
-      }
-    });
-  }
+export function setTodoPriority(id, newPriority, projectName = "Default") {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo) => {
+    if (todo.id == id) {
+      todo.priority = newPriority;
+      localStorage.setItem(projectName, JSON.stringify(project));
+      return;
+    }
+  });
 }
 
-export function toggleTodoComplete(id) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo) => {
-      if (todo.id == id) {
-        todo.complete = !todo.complete;
-        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
-        return;
-      }
-    });
-  }
+export function toggleTodoComplete(id, projectName = "Default") {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo) => {
+    if (todo.id == id) {
+      todo.complete = !todo.complete;
+      localStorage.setItem(projectName, JSON.stringify(project));
+      return;
+    }
+  });
 }
 
 export function getTodayTodos() {
