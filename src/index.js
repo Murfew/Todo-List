@@ -9,6 +9,4 @@ import {
   setTodoDueDate,
   toggleTodoComplete,
 } from "./appLogic";
-
-initializeStorage();
-createProject("Default");
+import { setAddButtonsListeners } from "./DOM";
