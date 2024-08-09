@@ -16,7 +16,6 @@ export function setAddButtonsListeners() {
   };
 
   addNew.addEventListener("click", () => {
-    console.log(addProject.style.display == "");
     if (addProject.style.display == "" || addProject.style.display == "none") {
       showSmallButtons();
     } else {
@@ -87,8 +86,38 @@ function generateProjectDialog() {
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
     createProject(titleInput.value, colorInput.value);
+    addProjectToPage(titleInput.value);
     dialog.close();
   });
 
   return dialog;
+}
+
+function addProjectToPage(name) {
+  const projectToAdd = JSON.parse(localStorage.getItem(name));
+
+  const projects = document.querySelector(".projects");
+
+  const newProject = document.createElement("li");
+  newProject.setAttribute("id", projectToAdd.title);
+
+  const colorIcon = document.createElement("span");
+  colorIcon.classList.add("material-symbols-outlined");
+  colorIcon.textContent = "circle";
+  colorIcon.style.color = projectToAdd.color;
+
+  const projectName = document.createElement("span");
+  projectName.textContent = projectToAdd.title;
+
+  projects.appendChild(newProject);
+  newProject.appendChild(colorIcon);
+  newProject.appendChild(projectName);
+}
+
+export function populateProjects() {
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i) != "debug") {
+      addProjectToPage(localStorage.key(i));
+    }
+  }
 }

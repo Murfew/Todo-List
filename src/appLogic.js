@@ -7,7 +7,7 @@ export function initializeStorage() {
 }
 
 export function createProject(title, color) {
-  for (let i = 1; i < localStorage.length; i++) {
+  for (let i = 0; i < localStorage.length; i++) {
     if (localStorage.key(i) === title) {
       return false;
     }
@@ -119,24 +119,28 @@ export function toggleTodoComplete(id, projectName = "Default") {
 
 export function getTodayTodos() {
   const todayTodos = [];
-  for (let i = 1; i < localStorage.length; i++) {
-    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    project.todos.forEach((todo) => {
-      if (isToday(new Date(todo.dueDate))) {
-        todayTodos.push(todo);
-      }
-    });
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i) != "debug") {
+      const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      project.todos.forEach((todo) => {
+        if (isToday(new Date(todo.dueDate))) {
+          todayTodos.push(todo);
+        }
+      });
+    }
   }
   return todayTodos;
 }
 
 export function getProjectTodos(project) {
-  for (let i = 1; i < localStorage.length; i++) {
-    const currentProject = JSON.parse(
-      localStorage.getItem(localStorage.key(i))
-    );
-    if (currentProject.title === project) {
-      return currentProject.todos;
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i) != "debug") {
+      const currentProject = JSON.parse(
+        localStorage.getItem(localStorage.key(i))
+      );
+      if (currentProject.title === project) {
+        return currentProject.todos;
+      }
     }
   }
 }
