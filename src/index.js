@@ -11,4 +11,4 @@ import {
 } from "./appLogic";
 
 initializeStorage();
-createTodo("test");
+createProject("Default");

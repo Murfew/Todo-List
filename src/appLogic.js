@@ -8,7 +8,14 @@ export function initializeStorage() {
 
 export function createProject(title) {
   //TODO no duplicate names
+  for (let i = 1; i < localStorage.length; i++) {
+    if (localStorage.key(i) === title) {
+      return false;
+    }
+  }
+
   localStorage.setItem(title, JSON.stringify(new Project(title)));
+  return true;
 }
 
 export function removeProject(title) {
