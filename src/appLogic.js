@@ -72,8 +72,23 @@ export function setTodoDescription(id, newDescription) {
   }
 }
 
-export function setTodoDueDate(id, newDueDate) {}
+export function setTodoDueDate(id, newDueDate) {
+  for (let i = 1; i < localStorage.length; i++) {
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    project.todos.forEach((todo) => {
+      if (todo.id == id) {
+        todo.dueDate = newDueDate;
+        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
+        return;
+      }
+    });
+  }
+}
 
 export function setTodoPriority(id, newPriority) {}
 
 export function setTodoComplete(id) {}
+
+export function getTodayTodos() {}
+
+export function getProjectTodos(project) {}
