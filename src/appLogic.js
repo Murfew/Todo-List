@@ -98,7 +98,18 @@ export function setTodoPriority(id, newPriority) {
   }
 }
 
-export function setTodoComplete(id) {}
+export function toggleTodoComplete(id) {
+  for (let i = 1; i < localStorage.length; i++) {
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    project.todos.forEach((todo) => {
+      if (todo.id == id) {
+        todo.complete = !todo.complete;
+        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
+        return;
+      }
+    });
+  }
+}
 
 export function getTodayTodos() {}
 
