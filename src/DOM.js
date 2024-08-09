@@ -23,12 +23,53 @@ export function setAddButtonsListeners() {
   });
 
   addProject.addEventListener("click", () => {
-    console.log("adding project");
     hideSmallButtons();
+    const dialog = generateProjectDialog();
+    dialog.showModal();
   });
 
   addTodo.addEventListener("click", () => {
-    console.log("adding todo");
     hideSmallButtons();
+    // create and show dialog for todo creation
   });
+}
+
+function generateProjectDialog() {
+  const body = document.querySelector("body");
+  const dialog = document.createElement("dialog");
+  const form = document.createElement("form");
+  const formTitle = document.createElement("h1");
+  const titleContainer = document.createElement("div");
+  const colorContainer = document.createElement("div");
+  const titleLabel = document.createElement("label");
+  const titleInput = document.createElement("input");
+  const colorLabel = document.createElement("label");
+  const colorInput = document.createElement("input");
+  const buttonContainer = document.createElement("div");
+  const submitButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
+
+  body.appendChild(dialog);
+  dialog.appendChild(form);
+  form.appendChild(formTitle);
+  form.appendChild(titleContainer);
+  form.appendChild(colorContainer);
+  form.appendChild(buttonContainer);
+  titleContainer.appendChild(titleLabel);
+  titleContainer.appendChild(titleInput);
+  colorContainer.appendChild(colorLabel);
+  colorContainer.appendChild(colorInput);
+  buttonContainer.appendChild(submitButton);
+  buttonContainer.appendChild(cancelButton);
+
+  formTitle.textContent = "Create New Project";
+  titleLabel.textContent = "Project Name";
+  colorLabel.textContent = "Project Color";
+  submitButton.textContent = "Create";
+  cancelButton.textContent = "Cancel";
+
+  colorInput.setAttribute("type", "color");
+  dialog.setAttribute("id", "project-create");
+
+  return dialog;
 }
