@@ -125,4 +125,13 @@ export function getTodayTodos() {
   return todayTodos;
 }
 
-export function getProjectTodos(project) {}
+export function getProjectTodos(project) {
+  for (let i = 1; i < localStorage.length; i++) {
+    const currentProject = JSON.parse(
+      localStorage.getItem(localStorage.key(i))
+    );
+    if (currentProject.title === project) {
+      return currentProject.todos;
+    }
+  }
+}
