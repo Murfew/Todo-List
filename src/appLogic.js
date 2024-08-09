@@ -20,8 +20,17 @@ export function createTodo(
   priority = 0,
   project = "Default"
 ) {
-  const todo = new Todo(title, description, dueDate, priority);
   const todoProject = JSON.parse(localStorage.getItem(project));
+  const todo = new Todo(
+    title,
+    description,
+    dueDate,
+    priority,
+    todoProject.idCounter
+  );
   todoProject.todos.push(todo);
+  todoProject.idCounter++;
   localStorage.setItem(project, JSON.stringify(todoProject));
 }
+
+export function removeTodo() {}
