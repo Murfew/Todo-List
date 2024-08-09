@@ -33,4 +33,15 @@ export function createTodo(
   localStorage.setItem(project, JSON.stringify(todoProject));
 }
 
-export function removeTodo() {}
+export function removeTodo(todoId) {
+  for (let i = 1; i < localStorage.length; i++) {
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    project.todos.forEach((todo, index) => {
+      if (todo.id == todoId) {
+        project.todos.splice(index, 1);
+        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
+        return;
+      }
+    });
+  }
+}
