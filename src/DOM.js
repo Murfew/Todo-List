@@ -1,4 +1,4 @@
-import { createProject } from "./appLogic";
+import { createProject, removeProject } from "./appLogic";
 
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
@@ -106,15 +106,27 @@ function addProjectToPage(name) {
   colorIcon.textContent = "circle";
   colorIcon.style.color = projectToAdd.color;
 
+  const deleteIcon = document.createElement("span");
+  deleteIcon.classList.add("material-symbols-outlined");
+  deleteIcon.textContent = "delete";
+
   const projectName = document.createElement("span");
   projectName.textContent = projectToAdd.title;
 
   projects.appendChild(newProject);
   newProject.appendChild(colorIcon);
   newProject.appendChild(projectName);
+  newProject.appendChild(deleteIcon);
+
+  deleteIcon.addEventListener("click", () => {
+    removeProject(projectName.textContent);
+    updateProjects();
+  });
 }
 
-export function populateProjects() {
+export function updateProjects() {
+  const projects = document.querySelector(".projects");
+  projects.replaceChildren();
   for (let i = 0; i < localStorage.length; i++) {
     if (localStorage.key(i) != "debug") {
       addProjectToPage(localStorage.key(i));

@@ -111,7 +111,7 @@ dialog {
   margin-right: 10px;
 }
 
-.projects li span:last-child {
+.projects li span:nth-child(2) {
   font-size: 24px;
 }
 
@@ -121,6 +121,23 @@ dialog {
   align-items: center;
   border-radius: 5px;
   padding: 5px;
+}
+
+.projects li:hover .material-symbols-outlined {
+  visibility: visible;
+}
+
+.projects:hover {
+  cursor: pointer;
+}
+
+.projects .material-symbols-outlined:hover {
+  color: red;
+}
+
+.projects li span:last-child {
+  margin-left: auto;
+  visibility: hidden;
 }
 
 ul {
