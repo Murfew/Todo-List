@@ -1,1 +1,51 @@
 @import "./reset.css";
+
+:root {
+  --white: #ffffff;
+  --light-purple: #b49fcc;
+  --dark-purple: #412234;
+  --purple: #6d466b;
+  --cream: #ead7d7;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidebar {
+  flex-basis: 25%;
+  background-color: var(--cream);
+  max-width: 300px;
+  padding: 20px;
+}
+
+.add-new {
+  background-color: #b49fcc;
+  border: none;
+  height: 75px;
+  width: 75px;
+  border-radius: 100%;
+  font-size: 3.5em;
+  color: var(--white);
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+main {
+  position: relative;
+  flex: 1;
+  padding: 20px;
+}
+
+.title {
+  font-size: 3em;
+  color: var(--dark-purple);
+  text-decoration: underline var(--dark-purple);
+}
+
+.add-new:hover {
+  filter: brightness(85%);
+}
