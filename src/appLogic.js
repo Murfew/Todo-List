@@ -3,17 +3,17 @@ import Todo from "./Todo";
 import { isToday } from "date-fns";
 
 export function initializeStorage() {
-  createProject("Default");
+  createProject("Default", "#000000");
 }
 
-export function createProject(title) {
+export function createProject(title, color) {
   for (let i = 1; i < localStorage.length; i++) {
     if (localStorage.key(i) === title) {
       return false;
     }
   }
 
-  localStorage.setItem(title, JSON.stringify(new Project(title)));
+  localStorage.setItem(title, JSON.stringify(new Project(title, color)));
   return true;
 }
 

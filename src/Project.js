@@ -1,5 +1,5 @@
 export default class Project {
-  constructor(title, color = undefined) {
+  constructor(title, color) {
     this.title = title;
     this.todos = [];
     this.idCounter = 0;

@@ -1,3 +1,5 @@
+import { createProject } from "./appLogic";
+
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
   const addProject = document.querySelector(".add-project");
@@ -70,6 +72,23 @@ function generateProjectDialog() {
 
   colorInput.setAttribute("type", "color");
   dialog.setAttribute("id", "project-create");
+  titleLabel.setAttribute("for", "project-name");
+  titleInput.setAttribute("id", "project-name");
+  colorLabel.setAttribute("for", "project-color");
+  colorInput.setAttribute("id", "project-color");
+  submitButton.setAttribute("type", "submit");
+
+  cancelButton.addEventListener("click", () => {
+    dialog.close();
+    titleInput.value = "";
+    colorInput.value = "";
+  });
+
+  submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    createProject(titleInput.value, colorInput.value);
+    dialog.close();
+  });
 
   return dialog;
 }

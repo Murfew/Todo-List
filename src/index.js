@@ -4,6 +4,7 @@ import {
   createTodo,
   getProjectTodos,
   initializeStorage,
+  removeProject,
   removeTodo,
   setTodoDescription,
   setTodoDueDate,
