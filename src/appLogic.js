@@ -59,7 +59,18 @@ export function setTodoTitle(id, newTitle) {
   }
 }
 
-export function setTodoDescription(id, newDescription) {}
+export function setTodoDescription(id, newDescription) {
+  for (let i = 1; i < localStorage.length; i++) {
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    project.todos.forEach((todo) => {
+      if (todo.id == id) {
+        todo.description = newDescription;
+        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
+        return;
+      }
+    });
+  }
+}
 
 export function setTodoDueDate(id, newDueDate) {}
 
