@@ -33,11 +33,11 @@ export function createTodo(
   localStorage.setItem(project, JSON.stringify(todoProject));
 }
 
-export function removeTodo(todoId) {
+export function removeTodo(id) {
   for (let i = 1; i < localStorage.length; i++) {
     const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
     project.todos.forEach((todo, index) => {
-      if (todo.id == todoId) {
+      if (todo.id == id) {
         project.todos.splice(index, 1);
         localStorage.setItem(localStorage.key(i), JSON.stringify(project));
         return;
@@ -45,3 +45,24 @@ export function removeTodo(todoId) {
     });
   }
 }
+
+export function setTodoTitle(id, newTitle) {
+  for (let i = 1; i < localStorage.length; i++) {
+    const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    project.todos.forEach((todo) => {
+      if (todo.id == id) {
+        todo.title = newTitle;
+        localStorage.setItem(localStorage.key(i), JSON.stringify(project));
+        return;
+      }
+    });
+  }
+}
+
+export function setTodoDescription(id, newDescription) {}
+
+export function setTodoDueDate(id, newDueDate) {}
+
+export function setTodoPriority(id, newPriority) {}
+
+export function setTodoComplete(id) {}

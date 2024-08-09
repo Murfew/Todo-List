@@ -1,4 +1,5 @@
 import "./styles.css";
-import { createTodo, initializeStorage, removeTodo } from "./appLogic";
+import { createTodo, initializeStorage } from "./appLogic";
 
 initializeStorage();
+createTodo("test");
