@@ -174,6 +174,9 @@ function generateTodoDialog() {
   const priorityInput = document.createElement("input");
   const priorityContainer = document.createElement("div");
   const formTitle = document.createElement("h1");
+  const projectLabel = document.createElement("label");
+  const projectContainer = document.createElement("div");
+  const projectSelect = document.createElement("select");
 
   body.appendChild(dialog);
   dialog.appendChild(form);
@@ -182,6 +185,7 @@ function generateTodoDialog() {
   form.appendChild(descContainer);
   form.appendChild(dueDateContainer);
   form.appendChild(priorityContainer);
+  form.appendChild(projectContainer);
   form.appendChild(buttonContainer);
   buttonContainer.appendChild(submitButton);
   buttonContainer.appendChild(cancelButton);
@@ -193,6 +197,22 @@ function generateTodoDialog() {
   dueDateContainer.appendChild(dueDateInput);
   priorityContainer.appendChild(priorityLabel);
   priorityContainer.appendChild(priorityInput);
+  projectContainer.appendChild(projectLabel);
+  projectContainer.appendChild(projectSelect);
+
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i) != "debug") {
+      const project = localStorage.key(i);
+      const newOption = document.createElement("option");
+      newOption.setAttribute("value", project);
+      newOption.textContent = project;
+      projectSelect.appendChild(newOption);
+
+      if (project === "Default") {
+        newOption.setAttribute("selected", true);
+      }
+    }
+  }
 
   dialog.setAttribute("id", "todo-create");
   titleLabel.setAttribute("for", "todo-name");
@@ -203,6 +223,8 @@ function generateTodoDialog() {
   dueDateInput.setAttribute("id", "todo-due-date");
   priorityLabel.setAttribute("for", "todo-priority");
   priorityInput.setAttribute("id", "todo-priority");
+  projectLabel.setAttribute("for", "todo-project");
+  projectSelect.setAttribute("id", "todo-project");
 
   dueDateInput.setAttribute("type", "datetime-local");
   priorityInput.setAttribute("type", "range");
@@ -218,6 +240,7 @@ function generateTodoDialog() {
   descLabel.textContent = "Description";
   dueDateLabel.textContent = "Due Date";
   priorityLabel.textContent = "Priority";
+  projectLabel.textContent = "Project";
 
   cancelButton.addEventListener("click", () => {
     dialog.close();
