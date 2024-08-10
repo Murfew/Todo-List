@@ -278,10 +278,13 @@ function updateTodos(projectName) {
   const project = JSON.parse(localStorage.getItem(projectName));
   project.todos.forEach((todo) => {
     addTodoToPage(todo, projectName);
+    // TODO make whole item dim, strikethrough title when checked
+    // TODO dueDate with approaching/missed variation
   });
 }
 
 function addTodoToPage(todo, projectName) {
+  // TODO on click, pop up dialog that allows for editing and deletion
   // Main container
   const todoContainer = document.querySelector(".todos");
   const todoItem = document.createElement("div");
@@ -289,7 +292,6 @@ function addTodoToPage(todo, projectName) {
   todoContainer.appendChild(todoItem);
 
   // Checkbox to complete
-  // TODO make whole item dim, strikethrough title when checked
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   checkbox.addEventListener("change", () => {
@@ -302,22 +304,7 @@ function addTodoToPage(todo, projectName) {
   todoName.textContent = todo.title;
   todoItem.appendChild(todoName);
 
-  // TODO dueDate with approaching/missed variation
   const todoDueDate = document.createElement("p");
   todoDueDate.textContent = todo.dueDate;
   todoItem.appendChild(todoDueDate);
-
-  // edit button
-  const editButton = document.createElement("span");
-  editButton.classList.add("material-symbols-outlined");
-  editButton.textContent = "edit";
-  todoItem.appendChild(editButton);
-  // TODO add event listener
-
-  // delete button
-  const deleteButton = document.createElement("span");
-  deleteButton.classList.add("material-symbols-outlined");
-  deleteButton.textContent = "delete";
-  todoItem.appendChild(deleteButton);
-  // TODO add event listener
 }
