@@ -74,20 +74,20 @@ dialog {
   padding: 30px;
 }
 
-#project-create div {
+dialog div {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-#project-create div:last-child {
+dialog div:last-child {
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 40px;
   margin-bottom: 0;
 }
 
-#project-create button {
+dialog button {
   border: none;
   background-color: var(--light-purple);
   border-radius: 10px;
@@ -102,7 +102,7 @@ dialog {
   padding: 0;
 }
 
-#project-create input {
+dialog input {
   margin-top: 5px;
 }
 
@@ -150,4 +150,13 @@ ul {
 
 .sidebar {
   overflow: auto;
+}
+
+dialog input[type="range"] {
+  accent-color: var(--light-purple);
+}
+
+dialog textarea {
+  resize: none;
+  height: 100px;
 }

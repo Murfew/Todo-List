@@ -31,7 +31,8 @@ export function setAddButtonsListeners() {
 
   addTodo.addEventListener("click", () => {
     hideSmallButtons();
-    // create and show dialog for todo creation
+    const dialog = generateTodoDialog();
+    dialog.showModal();
   });
 }
 
@@ -64,8 +65,8 @@ function generateProjectDialog() {
   buttonContainer.appendChild(cancelButton);
 
   formTitle.textContent = "Create New Project";
-  titleLabel.textContent = "Project Name";
-  colorLabel.textContent = "Project Color";
+  titleLabel.textContent = "Name";
+  colorLabel.textContent = "Color";
   submitButton.textContent = "Create";
   cancelButton.textContent = "Cancel";
 
@@ -150,4 +151,72 @@ function setActiveProject(projectName) {
   document.querySelector("main .title").textContent = projectName;
 
   //TODO Change main page content to this project's todos
+}
+
+function generateTodoDialog() {
+  const body = document.querySelector("body");
+  const dialog = document.createElement("dialog");
+  const form = document.createElement("form");
+  const cancelButton = document.createElement("button");
+  const submitButton = document.createElement("button");
+  const buttonContainer = document.createElement("div");
+  const titleLabel = document.createElement("label");
+  const titleInput = document.createElement("input");
+  const titleContainer = document.createElement("div");
+  const descLabel = document.createElement("label");
+  const descInput = document.createElement("textarea");
+  const descContainer = document.createElement("div");
+  const dueDateLabel = document.createElement("label");
+  const dueDateInput = document.createElement("input");
+  const dueDateContainer = document.createElement("div");
+  const priorityLabel = document.createElement("label");
+  const priorityInput = document.createElement("input");
+  const priorityContainer = document.createElement("div");
+  const formTitle = document.createElement("h1");
+
+  body.appendChild(dialog);
+  dialog.appendChild(form);
+  form.appendChild(formTitle);
+  form.appendChild(titleContainer);
+  form.appendChild(descContainer);
+  form.appendChild(dueDateContainer);
+  form.appendChild(priorityContainer);
+  form.appendChild(buttonContainer);
+  buttonContainer.appendChild(submitButton);
+  buttonContainer.appendChild(cancelButton);
+  titleContainer.appendChild(titleLabel);
+  titleContainer.appendChild(titleInput);
+  descContainer.appendChild(descLabel);
+  descContainer.appendChild(descInput);
+  dueDateContainer.appendChild(dueDateLabel);
+  dueDateContainer.appendChild(dueDateInput);
+  priorityContainer.appendChild(priorityLabel);
+  priorityContainer.appendChild(priorityInput);
+
+  dialog.setAttribute("id", "todo-create");
+  titleLabel.setAttribute("for", "todo-name");
+  titleInput.setAttribute("id", "todo-name");
+  descLabel.setAttribute("for", "todo-desc");
+  descInput.setAttribute("id", "todo-desc");
+  dueDateLabel.setAttribute("for", "todo-due-date");
+  dueDateInput.setAttribute("id", "todo-due-date");
+  priorityLabel.setAttribute("for", "todo-priority");
+  priorityInput.setAttribute("id", "todo-priority");
+
+  dueDateInput.setAttribute("type", "datetime-local");
+  priorityInput.setAttribute("type", "range");
+  priorityInput.setAttribute("min", "0");
+  priorityInput.setAttribute("max", "3");
+  priorityInput.setAttribute("value", "0");
+  submitButton.setAttribute("type", "submit");
+
+  formTitle.textContent = "Create New Todo";
+  submitButton.textContent = "Create";
+  cancelButton.textContent = "Cancel";
+  titleLabel.textContent = "Name";
+  descLabel.textContent = "Description";
+  dueDateLabel.textContent = "Due Date";
+  priorityLabel.textContent = "Priority";
+
+  return dialog;
 }
