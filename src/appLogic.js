@@ -21,13 +21,7 @@ export function removeProject(title) {
   localStorage.removeItem(title);
 }
 
-export function createTodo(
-  title,
-  description = "",
-  dueDate = "",
-  priority = 0,
-  project = "Default"
-) {
+export function createTodo(title, description, dueDate, priority, project) {
   const todoProject = JSON.parse(localStorage.getItem(project));
   const todo = new Todo(
     title,

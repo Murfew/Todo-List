@@ -1,4 +1,4 @@
-import { createProject, removeProject } from "./appLogic";
+import { createProject, createTodo, removeProject } from "./appLogic";
 
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
@@ -149,11 +149,12 @@ export function updateProjects() {
 
 function setActiveProject(projectName) {
   document.querySelector("main .title").textContent = projectName;
-
-  //TODO Change main page content to this project's todos
+  updateTodos();
 }
 
 function generateTodoDialog() {
+  //TODO add select to pick the project
+
   const body = document.querySelector("body");
   const dialog = document.createElement("dialog");
   const form = document.createElement("form");
@@ -218,5 +219,30 @@ function generateTodoDialog() {
   dueDateLabel.textContent = "Due Date";
   priorityLabel.textContent = "Priority";
 
+  cancelButton.addEventListener("click", () => {
+    dialog.close();
+    titleInput.value = "";
+    descInput.value = "";
+    dueDateInput.value = "";
+    priorityInput.value = "";
+  });
+
+  submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    // TODO add project input
+    createTodo(
+      titleInput.value,
+      descInput.value,
+      dueDateInput.value,
+      priorityInput.value
+    );
+    // TODO add project input
+    setActiveProject();
+    dialog.close();
+  });
+
   return dialog;
 }
+
+// TODO
+function updateTodos() {}
