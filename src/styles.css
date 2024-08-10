@@ -113,6 +113,7 @@ dialog {
 
 .projects li span:nth-child(2) {
   font-size: 24px;
+  flex-basis: 100%;
 }
 
 .projects li {
@@ -136,7 +137,6 @@ dialog {
 }
 
 .projects li span:last-child {
-  margin-left: auto;
   visibility: hidden;
 }
 

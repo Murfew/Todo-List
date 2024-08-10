@@ -120,14 +120,19 @@ function addProjectToPage(name) {
 
   deleteIcon.addEventListener("click", () => {
     removeProject(projectName.textContent);
-    ///TODO change the current main page to the default one
+    setActiveProject("Default");
+    console.log("here");
     updateProjects();
   });
 
-  newProject.addEventListener("click", () => {
-    document.querySelector("main .title").textContent = projectName.textContent;
+  projectName.addEventListener("click", () => {
+    setActiveProject(projectName.textContent);
+    console.log("this");
+  });
 
-    //TODO Change main page content to this project's todos
+  colorIcon.addEventListener("click", () => {
+    setActiveProject(projectName.textContent);
+    console.log("this");
   });
 }
 
@@ -139,4 +144,10 @@ export function updateProjects() {
       addProjectToPage(localStorage.key(i));
     }
   }
+}
+
+function setActiveProject(projectName) {
+  document.querySelector("main .title").textContent = projectName;
+
+  //TODO Change main page content to this project's todos
 }
