@@ -35,7 +35,7 @@ export function createTodo(title, description, dueDate, priority, project) {
   localStorage.setItem(project, JSON.stringify(todoProject));
 }
 
-export function removeTodo(id, projectName = "Default") {
+export function removeTodo(id, projectName) {
   const project = JSON.parse(localStorage.getItem(projectName));
 
   project.todos.forEach((todo, index) => {
@@ -47,7 +47,7 @@ export function removeTodo(id, projectName = "Default") {
   });
 }
 
-export function setTodoTitle(id, newTitle, projectName = "Default") {
+export function setTodoTitle(id, newTitle, projectName) {
   const project = JSON.parse(localStorage.getItem(projectName));
 
   project.todos.forEach((todo) => {
@@ -75,7 +75,7 @@ export function setTodoDescription(
   });
 }
 
-export function setTodoDueDate(id, newDueDate, projectName = "Default") {
+export function setTodoDueDate(id, newDueDate, projectName) {
   const project = JSON.parse(localStorage.getItem(projectName));
 
   project.todos.forEach((todo) => {
@@ -87,7 +87,7 @@ export function setTodoDueDate(id, newDueDate, projectName = "Default") {
   });
 }
 
-export function setTodoPriority(id, newPriority, projectName = "Default") {
+export function setTodoPriority(id, newPriority, projectName) {
   const project = JSON.parse(localStorage.getItem(projectName));
 
   project.todos.forEach((todo) => {
@@ -99,7 +99,7 @@ export function setTodoPriority(id, newPriority, projectName = "Default") {
   });
 }
 
-export function toggleTodoComplete(id, projectName = "Default") {
+export function toggleTodoComplete(id, projectName) {
   const project = JSON.parse(localStorage.getItem(projectName));
 
   project.todos.forEach((todo) => {
@@ -109,32 +109,4 @@ export function toggleTodoComplete(id, projectName = "Default") {
       return;
     }
   });
-}
-
-export function getTodayTodos() {
-  const todayTodos = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.key(i) != "debug") {
-      const project = JSON.parse(localStorage.getItem(localStorage.key(i)));
-      project.todos.forEach((todo) => {
-        if (isToday(new Date(todo.dueDate))) {
-          todayTodos.push(todo);
-        }
-      });
-    }
-  }
-  return todayTodos;
-}
-
-export function getProjectTodos(project) {
-  for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.key(i) != "debug") {
-      const currentProject = JSON.parse(
-        localStorage.getItem(localStorage.key(i))
-      );
-      if (currentProject.title === project) {
-        return currentProject.todos;
-      }
-    }
-  }
 }

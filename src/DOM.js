@@ -1,4 +1,11 @@
-import { createProject, createTodo, removeProject } from "./appLogic";
+import {
+  createProject,
+  createTodo,
+  removeProject,
+  toggleTodoComplete,
+} from "./appLogic";
+
+// TODO add required fields to dialogs
 
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
@@ -149,12 +156,10 @@ export function updateProjects() {
 
 function setActiveProject(projectName) {
   document.querySelector("main .title").textContent = projectName;
-  updateTodos();
+  updateTodos(projectName);
 }
 
 function generateTodoDialog() {
-  //TODO add select to pick the project
-
   const body = document.querySelector("body");
   const dialog = document.createElement("dialog");
   const form = document.createElement("form");
@@ -252,20 +257,67 @@ function generateTodoDialog() {
 
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
-    // TODO add project input
     createTodo(
       titleInput.value,
       descInput.value,
       dueDateInput.value,
-      priorityInput.value
+      priorityInput.value,
+      projectSelect.value
     );
-    // TODO add project input
-    setActiveProject();
+    setActiveProject(projectSelect.value);
     dialog.close();
   });
 
   return dialog;
 }
 
-// TODO
-function updateTodos() {}
+function updateTodos(projectName) {
+  // loop over all todo item in a project
+  // display each item in the DOM
+
+  const project = JSON.parse(localStorage.getItem(projectName));
+  project.todos.forEach((todo) => {
+    addTodoToPage(todo, projectName);
+  });
+}
+
+function addTodoToPage(todo, projectName) {
+  // Main container
+  const todoContainer = document.querySelector(".todos");
+  const todoItem = document.createElement("div");
+  todoItem.classList.add("todo-item");
+  todoContainer.appendChild(todoItem);
+
+  // Checkbox to complete
+  // TODO make whole item dim, strikethrough title when checked
+  const checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.addEventListener("change", () => {
+    toggleTodoComplete(todo.id, projectName);
+  });
+  todoItem.appendChild(checkbox);
+
+  // name
+  const todoName = document.createElement("p");
+  todoName.textContent = todo.title;
+  todoItem.appendChild(todoName);
+
+  // TODO dueDate with approaching/missed variation
+  const todoDueDate = document.createElement("p");
+  todoDueDate.textContent = todo.dueDate;
+  todoItem.appendChild(todoDueDate);
+
+  // edit button
+  const editButton = document.createElement("span");
+  editButton.classList.add("material-symbols-outlined");
+  editButton.textContent = "edit";
+  todoItem.appendChild(editButton);
+  // TODO add event listener
+
+  // delete button
+  const deleteButton = document.createElement("span");
+  deleteButton.classList.add("material-symbols-outlined");
+  deleteButton.textContent = "delete";
+  todoItem.appendChild(deleteButton);
+  // TODO add event listener
+}
