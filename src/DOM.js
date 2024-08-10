@@ -119,15 +119,15 @@ function addProjectToPage(name) {
   newProject.appendChild(deleteIcon);
 
   deleteIcon.addEventListener("click", () => {
-    removeProject(projectName.textContent);
-    setActiveProject("Default");
-    console.log("here");
-    updateProjects();
+    if (projectName.textContent !== "Default") {
+      removeProject(projectName.textContent);
+      setActiveProject("Default");
+      updateProjects();
+    }
   });
 
   projectName.addEventListener("click", () => {
     setActiveProject(projectName.textContent);
-    console.log("this");
   });
 
   colorIcon.addEventListener("click", () => {
