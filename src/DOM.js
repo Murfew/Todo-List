@@ -10,6 +10,8 @@ import {
   toggleTodoComplete,
 } from "./appLogic";
 
+import { format } from "date-fns";
+
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
   const addProject = document.querySelector(".add-project");
@@ -287,7 +289,6 @@ export function updateTodos(projectName) {
 }
 
 function addTodoToPage(todo, projectName) {
-  //TODO format due date
   // Main container
   const todoContainer = document.querySelector(".todos");
   const todoItem = document.createElement("div");
@@ -311,7 +312,7 @@ function addTodoToPage(todo, projectName) {
   //due date
   const todoDueDate = document.createElement("p");
   todoDueDate.classList.add("due-date");
-  todoDueDate.textContent = todo.dueDate;
+  todoDueDate.textContent = format(new Date(todo.dueDate), "MMMM do yyyy");
   todoItem.appendChild(todoDueDate);
 
   //description
