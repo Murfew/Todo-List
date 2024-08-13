@@ -85,6 +85,8 @@ function generateProjectDialog() {
   colorInput.setAttribute("id", "project-color");
   submitButton.setAttribute("type", "submit");
 
+  titleInput.setAttribute("required", true);
+
   cancelButton.addEventListener("click", () => {
     dialog.close();
     titleInput.value = "";
@@ -272,6 +274,10 @@ function generateTodoDialog() {
 }
 
 function updateTodos(projectName) {
+  // remove all current todo items
+  const todosContainer = document.querySelector(".todos");
+  todosContainer.replaceChildren("");
+
   // loop over all todo item in a project
   // display each item in the DOM
 
