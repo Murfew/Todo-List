@@ -321,6 +321,8 @@ function addTodoToPage(todo, projectName) {
   todoDescription.textContent = todo.description;
   todoItem.appendChild(todoDescription);
 
+  todoItem.classList.add(`priority-${todo.priority}`);
+
   todoItem.addEventListener("click", () => {
     showEditTodoDialog(todo.id, projectName);
   });
@@ -421,5 +423,3 @@ function showEditTodoDialog(id, projectName) {
     }
   });
 }
-
-//TODO add styling for priorities

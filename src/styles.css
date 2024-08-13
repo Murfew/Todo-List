@@ -173,7 +173,6 @@ dialog textarea {
 
 .todos div {
   display: grid;
-  background-color: lightgray;
   grid-template: 1fr 1fr / 0.25fr 1fr 2fr;
   align-items: center;
   padding-left: 10px;
@@ -208,10 +207,41 @@ dialog textarea {
 }
 
 .todos div:hover {
-  background-color: gray;
   cursor: pointer;
 }
 
 .todos div:active {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25) inset;
+}
+
+.priority-0 {
+  background-color: lightgray;
+}
+
+.priority-0:hover {
+  background-color: gray;
+}
+
+.priority-1 {
+  background-color: palegoldenrod;
+}
+
+.priority-1:hover {
+  background-color: goldenrod;
+}
+
+.priority-2 {
+  background-color: orange;
+}
+
+.priority-2:hover {
+  background-color: peru;
+}
+
+.priority-3 {
+  background-color: indianred;
+}
+
+.priority-3:hover {
+  background-color: crimson;
 }
