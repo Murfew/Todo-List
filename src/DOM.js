@@ -2,6 +2,11 @@ import {
   createProject,
   createTodo,
   removeProject,
+  removeTodo,
+  setTodoDescription,
+  setTodoDueDate,
+  setTodoPriority,
+  setTodoTitle,
   toggleTodoComplete,
 } from "./appLogic";
 
@@ -397,12 +402,17 @@ function showEditTodoDialog(id, projectName) {
 
       deleteButton.addEventListener("click", () => {
         dialog.close();
-        //TODO delete todo
+        removeTodo(id, projectName);
+        updateTodos(projectName);
       });
 
       saveButton.addEventListener("click", (e) => {
         e.preventDefault();
-        //TODO edit todo
+        setTodoTitle(id, titleInput.value, projectName);
+        setTodoDescription(id, descInput.textContent, projectName);
+        setTodoDueDate(id, dueDateInput.value, projectName);
+        setTodoPriority(id, priorityInput.value, projectName);
+        updateTodos(projectName);
         dialog.close();
       });
 
@@ -410,3 +420,5 @@ function showEditTodoDialog(id, projectName) {
     }
   });
 }
+
+//TODO add styling for priorities
