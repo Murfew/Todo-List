@@ -5,7 +5,7 @@ import {
   toggleTodoComplete,
 } from "./appLogic";
 
-// TODO add required fields to dialogs
+//TODO Handle default behavior in the case of empty inputs
 
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
@@ -85,8 +85,6 @@ function generateProjectDialog() {
   colorInput.setAttribute("id", "project-color");
   submitButton.setAttribute("type", "submit");
 
-  titleInput.setAttribute("required", true);
-
   cancelButton.addEventListener("click", () => {
     dialog.close();
     titleInput.value = "";
@@ -94,7 +92,6 @@ function generateProjectDialog() {
   });
 
   submitButton.addEventListener("click", (e) => {
-    e.preventDefault();
     createProject(titleInput.value, colorInput.value);
     addProjectToPage(titleInput.value);
     dialog.close();
@@ -273,7 +270,7 @@ function generateTodoDialog() {
   return dialog;
 }
 
-function updateTodos(projectName) {
+export function updateTodos(projectName) {
   // remove all current todo items
   const todosContainer = document.querySelector(".todos");
   todosContainer.replaceChildren("");
@@ -307,10 +304,19 @@ function addTodoToPage(todo, projectName) {
 
   // name
   const todoName = document.createElement("p");
+  todoName.classList.add("name");
   todoName.textContent = todo.title;
   todoItem.appendChild(todoName);
 
+  //due date
   const todoDueDate = document.createElement("p");
+  todoDueDate.classList.add("due-date");
   todoDueDate.textContent = todo.dueDate;
   todoItem.appendChild(todoDueDate);
+
+  //description
+  const todoDescription = document.createElement("p");
+  todoDescription.classList.add("desc");
+  todoDescription.textContent = todo.description;
+  todoItem.appendChild(todoDescription);
 }
