@@ -5,8 +5,6 @@ import {
   toggleTodoComplete,
 } from "./appLogic";
 
-//TODO Handle default behavior in the case of empty inputs
-
 export function setAddButtonsListeners() {
   const addNew = document.querySelector(".add-new");
   const addProject = document.querySelector(".add-project");
@@ -277,17 +275,14 @@ export function updateTodos(projectName) {
 
   // loop over all todo item in a project
   // display each item in the DOM
-
   const project = JSON.parse(localStorage.getItem(projectName));
   project.todos.forEach((todo) => {
     addTodoToPage(todo, projectName);
-    // TODO make whole item dim, strikethrough title when checked
-    // TODO dueDate with approaching/missed variation
   });
 }
 
 function addTodoToPage(todo, projectName) {
-  // TODO on click, pop up dialog that allows for editing and deletion
+  //TODO format due date
   // Main container
   const todoContainer = document.querySelector(".todos");
   const todoItem = document.createElement("div");
@@ -319,4 +314,99 @@ function addTodoToPage(todo, projectName) {
   todoDescription.classList.add("desc");
   todoDescription.textContent = todo.description;
   todoItem.appendChild(todoDescription);
+
+  todoItem.addEventListener("click", () => {
+    showEditTodoDialog(todo.id, projectName);
+  });
+}
+
+function showEditTodoDialog(id, projectName) {
+  const project = JSON.parse(localStorage.getItem(projectName));
+
+  project.todos.forEach((todo) => {
+    if (todo.id == id) {
+      const body = document.querySelector("body");
+      const dialog = document.createElement("dialog");
+      const form = document.createElement("form");
+      const deleteButton = document.createElement("button");
+      const saveButton = document.createElement("button");
+      const buttonContainer = document.createElement("div");
+      const titleLabel = document.createElement("label");
+      const titleInput = document.createElement("input");
+      const titleContainer = document.createElement("div");
+      const descLabel = document.createElement("label");
+      const descInput = document.createElement("textarea");
+      const descContainer = document.createElement("div");
+      const dueDateLabel = document.createElement("label");
+      const dueDateInput = document.createElement("input");
+      const dueDateContainer = document.createElement("div");
+      const priorityLabel = document.createElement("label");
+      const priorityInput = document.createElement("input");
+      const priorityContainer = document.createElement("div");
+      const formTitle = document.createElement("h1");
+
+      body.appendChild(dialog);
+      dialog.appendChild(form);
+      form.appendChild(formTitle);
+      form.appendChild(titleContainer);
+      form.appendChild(descContainer);
+      form.appendChild(dueDateContainer);
+      form.appendChild(priorityContainer);
+      form.appendChild(buttonContainer);
+      buttonContainer.appendChild(saveButton);
+      buttonContainer.appendChild(deleteButton);
+      titleContainer.appendChild(titleLabel);
+      titleContainer.appendChild(titleInput);
+      descContainer.appendChild(descLabel);
+      descContainer.appendChild(descInput);
+      dueDateContainer.appendChild(dueDateLabel);
+      dueDateContainer.appendChild(dueDateInput);
+      priorityContainer.appendChild(priorityLabel);
+      priorityContainer.appendChild(priorityInput);
+
+      dialog.setAttribute("id", "todo-edit");
+      titleLabel.setAttribute("for", "todo-edit-name");
+      titleInput.setAttribute("id", "todo-edit-name");
+      descLabel.setAttribute("for", "todo-edit-desc");
+      descInput.setAttribute("id", "todo-edit-desc");
+      dueDateLabel.setAttribute("for", "todo-edit-due-date");
+      dueDateInput.setAttribute("id", "todo-edit-due-date");
+      priorityLabel.setAttribute("for", "todo-edit-priority");
+      priorityInput.setAttribute("id", "todo-edit-priority");
+
+      dueDateInput.setAttribute("type", "datetime-local");
+      priorityInput.setAttribute("type", "range");
+      priorityInput.setAttribute("min", "0");
+      priorityInput.setAttribute("max", "3");
+      priorityInput.setAttribute("value", "0");
+      saveButton.setAttribute("type", "submit");
+
+      //grab todo's values
+      titleInput.setAttribute("value", todo.title);
+      priorityInput.setAttribute("value", todo.priority);
+      descInput.textContent = todo.description;
+      dueDateInput.setAttribute("value", todo.dueDate);
+
+      formTitle.textContent = "Edit Todo";
+      saveButton.textContent = "Save";
+      deleteButton.textContent = "Delete";
+      titleLabel.textContent = "Name";
+      descLabel.textContent = "Description";
+      dueDateLabel.textContent = "Due Date";
+      priorityLabel.textContent = "Priority";
+
+      deleteButton.addEventListener("click", () => {
+        dialog.close();
+        //TODO delete todo
+      });
+
+      saveButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        //TODO edit todo
+        dialog.close();
+      });
+
+      dialog.showModal();
+    }
+  });
 }
